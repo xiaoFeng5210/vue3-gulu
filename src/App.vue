@@ -7,7 +7,7 @@ import { ref, provide } from "vue";
 export default {
   name: "App",
   setup() {
-    const menuVisible = ref(false);
+    const menuVisible = ref(true);
     provide("menuVisible", menuVisible);
   }
 };
