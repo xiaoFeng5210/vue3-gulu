@@ -1,11 +1,20 @@
 <template>
-  <button>
+  <button :class="{checked: switchState}" @click="toggleSwitch">
     <span></span>
   </button>
 </template>
 
 <script lang="ts">
-export default {};
+import { ref } from "vue";
+export default {
+  setup() {
+    const switchState = ref(false);
+    const toggleSwitch = () => {
+      switchState.value = !switchState.value;
+    };
+    return { switchState, toggleSwitch };
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -15,7 +24,7 @@ button {
   height: $h;
   width: $h * 2;
   border: none;
-  background: blue;
+  background: grey;
   border-radius: $h / 2;
   position: relative;
 }
@@ -28,7 +37,10 @@ span {
   background: white;
   border-radius: $h2 / 2;
 }
-button:hover > span {
+button.checked {
+  background: blue;
+}
+button.checked > span {
   left: calc(100% - #{$h2} - 2px);
 }
 </style>
