@@ -5,6 +5,7 @@ import "./index.css";
 import Home from "./views/Home.vue";
 import Doc from "./views/Doc.vue";
 import Switch from "./components/Switch.vue";
+import ButtonDemo from "./components/ButtonDemo.vue";
 
 const history = createWebHashHistory();
 const router = createRouter({
@@ -21,6 +22,10 @@ const router = createRouter({
         {
           path: "switch",
           component: Switch,
+        },
+        {
+          path: "button",
+          component: ButtonDemo,
         },
       ],
     },
