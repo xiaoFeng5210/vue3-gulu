@@ -1,36 +1,19 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import { createWebHashHistory, createRouter } from "vue-router";
 import "./index.css";
-import Home from "./views/Home.vue";
-import Doc from "./views/Doc.vue";
-import Switch from "./components/Switch.vue";
-import ButtonDemo from "./components/ButtonDemo.vue";
+import { router } from "./router/router";
+// 通用字体
+import 'vfonts/Lato.css';
+import {
+    create,
+    NButton
+} from 'naive-ui'
 
-const history = createWebHashHistory();
-const router = createRouter({
-  history: history,
-  routes: [
-    {
-      path: "/",
-      component: Home,
-    },
-    {
-      path: "/doc",
-      component: Doc,
-      children: [
-        {
-          path: "switch",
-          component: Switch,
-        },
-        {
-          path: "button",
-          component: ButtonDemo,
-        },
-      ],
-    },
-  ],
-});
+const naive = create({
+    components: [NButton]
+})
+
 const app = createApp(App);
 app.use(router);
+app.use(naive);
 app.mount("#app");
