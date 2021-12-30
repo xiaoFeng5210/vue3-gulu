@@ -1,7 +1,7 @@
 <template>
   <div class="topnav">
     <div class="logo" @click="handleChangeMenu" style="padding-left: 50px;">logo</div>
-    <div class="menu" style="padding-right: 50px;">
+    <div class="menu" v-if="isShowHome" style="padding-right: 50px;" @click="notShowHome">
       <router-link to="/" style="text-decoration: none; color: black">首页</router-link>
     </div>
   </div>
@@ -15,8 +15,11 @@ export default {
     const handleChangeMenu = () => {
       menuVisible.value = !menuVisible.value;
     };
-
-    return { handleChangeMenu };
+    const isShowHome = inject<Ref<boolean>>("isShowHome");
+    const notShowHome = () => {
+      isShowHome.value = false
+    }
+    return { handleChangeMenu, notShowHome, isShowHome };
   }
 };
 </script>

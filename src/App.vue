@@ -9,7 +9,9 @@ export default {
   setup() {
     //* 一个全局的provide注入
     const menuVisible = ref(true);
+    const isShowHome = ref(false);
     provide("menuVisible", menuVisible);
+    provide("isShowHome", isShowHome);
   }
 };
 </script>

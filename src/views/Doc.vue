@@ -30,6 +30,7 @@
 import Topnav from "../components/Topnav.vue";
 import {
     inject,
+    onMounted,
     Ref
 } from "vue";
 export default {
@@ -38,6 +39,10 @@ export default {
     },
     setup() {
         const menuVisible = inject<Ref<boolean>>("menuVisible");
+        const isShowHome = inject<Ref<boolean>>("isShowHome");
+        onMounted(() => {
+            isShowHome.value = true;
+        })
         return {
             menuVisible
         };
