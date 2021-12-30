@@ -3,10 +3,12 @@
         <div
             class="gulu-tabs-nav-item"
             :class="{ selected: t === selected }"
-            v-for="t in titles"
+            v-for="(t, index) in titles"
             :key="t"
-            @click="changeTab(t)"
+            :ref="el => { if (el) navItems[index] = el }"
+            @click="changeTab(t, index)"
         >{{ t }}</div>
+        <div class="gulu-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div>
         <!-- <component v-for="(c, index) in defaults" :key="index" :is="c" /> -->
@@ -15,13 +17,23 @@
 </template>
 
 <script>
-import { watchEffect, reactive, computed } from 'vue';
+import { watchEffect, reactive, computed, ref, onMounted } from 'vue';
 import Tab from './Tab.vue'
 export default {
     props: {
         selected: String
     },
     setup(props, context) {
+        const navItems = ref([]);
+        const indicator = ref(null);
+        const navItemWidth = ref(null);
+        onMounted(() => {
+            const divs = navItems.value;
+            const resultDiv = divs.find(div => div.classList.contains('selected'));
+            const { width } = resultDiv.getBoundingClientRect();
+            indicator.value.style.width = width + 'px';
+            navItemWidth.value = width;
+        });
         const defaults = context.slots.default();
         defaults.forEach((tag) => {
             if (tag.type !== Tab) {
@@ -35,19 +47,23 @@ export default {
             current = Object.assign(current, defaults.filter(tag => tag.props.title === props.selected)[0]);
             console.log(JSON.parse(JSON.stringify(current)))
         })
-        const changeTab = (title) => {
+        const changeTab = (title, index) => {
             if (title === props.selected) return;
+            // 每次点击tab的时候底部的横线也要跟着滑动
+            indicator.value.style.left = (navItemWidth.value * index) + 'px';
             context.emit('update:selected', title);
         }
-        return { defaults, titles, current, changeTab }
+        return { defaults, titles, current, changeTab, navItems, indicator }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+$blue: #609fea;
 .gulu-tabs-nav {
     display: flex;
     border-bottom: 1px solid #d7dbdb;
+    position: relative;
 }
 .gulu-tabs-nav-item {
     padding-bottom: 5px;
@@ -56,6 +72,15 @@ export default {
     cursor: pointer;
 }
 .selected {
-    color: #609fea;
+    color: $blue;
+}
+.gulu-tabs-nav-indicator {
+    position: absolute;
+    height: 3px;
+    background: $blue;
+    left: 0;
+    bottom: -1px;
+    // width: 100px;
+    transition: left 0.2s ease-in-out;
 }
 </style>
