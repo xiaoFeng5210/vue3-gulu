@@ -5,15 +5,17 @@
             :class="{ selected: t === selected }"
             v-for="t in titles"
             :key="t"
+            @click="changeTab(t)"
         >{{ t }}</div>
     </div>
     <div>
         <!-- <component v-for="(c, index) in defaults" :key="index" :is="c" /> -->
-        <component :is="current"></component>
+        <component :is="current" :key="current.props.title"></component>
     </div>
 </template>
 
 <script>
+import { watchEffect, reactive, computed } from 'vue';
 import Tab from './Tab.vue'
 export default {
     props: {
@@ -27,8 +29,17 @@ export default {
             }
         });
         const titles = defaults.map(tag => tag.props.title);
-        const current = defaults.filter(tag => tag.props.title === props.selected)[0];
-        return { defaults, titles, current }
+        // const current = computed(() => defaults.filter(tag => tag.props.title === props.selected)[0])
+        let current = reactive({ props: null });
+        watchEffect(() => {
+            current = Object.assign(current, defaults.filter(tag => tag.props.title === props.selected)[0]);
+            console.log(JSON.parse(JSON.stringify(current)))
+        })
+        const changeTab = (title) => {
+            if (title === props.selected) return;
+            context.emit('update:selected', title);
+        }
+        return { defaults, titles, current, changeTab }
     }
 }
 </script>
