@@ -3,12 +3,12 @@
     <component v-for="(c, index) in defaults" :key="index" :is="c" />
 </template>
 
-<script lang="ts">
+<script>
 import Tab from './Tab.vue'
 export default {
     setup(props, context) {
         const defaults = context.slots.default();
-        defaults.forEach((tag: { type: {}; }) => {
+        defaults.forEach((tag) => {
             if (tag.type !== Tab) {
                 throw new Error('Tabs子组件必须是Tab');
             }
