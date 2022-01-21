@@ -6,6 +6,7 @@ import ButtonDemo from "../components/ButtonDemo.vue";
 import starDemoVue from "../components/starDemo.vue";
 import dialogDemoVue from "../components/dialogDemo.vue";
 import tabsDemoVue from "../components/tabsDemo.vue";
+import formDemoVue from "../components/formDemo.vue"
 
 const history = createWebHashHistory();
 
@@ -39,6 +40,10 @@ export const router = createRouter({
                 {
                     path: "tabDemo",
                     component: tabsDemoVue,
+                },
+                {
+                    path: "formDemo",
+                    component: formDemoVue,
                 }
             ],
         },

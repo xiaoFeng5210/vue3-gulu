@@ -18,6 +18,9 @@
                 <div class="star aside_item">
                     <router-link to="/doc/tabDemo" class="aside__style">Tab组件</router-link>
                 </div>
+                <!-- <div class="star aside_item">
+                    <router-link to="/doc/formDemo" class="aside__style">表单组件</router-link>
+                </div>-->
             </aside>
             <main class="main">
                 <router-view></router-view>

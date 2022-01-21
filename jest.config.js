@@ -8,6 +8,9 @@ module.exports = {
       //.ts文件用ts-jest处理
       '^.+\\.ts$': 'ts-jest'
     },
-    testMatch: ['**/?(*.)+(spec).[jt]s?(x)']
+    testMatch: ['**/?(*.)+(spec).[jt]s?(x)'],
+    // * 代码测试覆盖率
+    collectCoverage: true, 
+    coverageReporters: ["json", "html"],
   }
   
