@@ -45,7 +45,7 @@ export default {
         let current = reactive({ props: null });
         watchEffect(() => {
             current = Object.assign(current, defaults.filter(tag => tag.props.title === props.selected)[0]);
-            console.log(JSON.parse(JSON.stringify(current)))
+            console.log(JSON.parse(JSON.stringify(current)));
         })
         const changeTab = (title, index) => {
             if (title === props.selected) return;

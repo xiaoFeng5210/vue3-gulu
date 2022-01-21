@@ -6,7 +6,7 @@
       <h2>一个好用的vue3 UI框架</h2>
       <div class="route_doc">
         <a class="init_nav" href="https://www.github.com/xiaoFeng5210">GitHub</a>
-        <router-link class="to_doc init_nav" to="/doc">开始</router-link>
+        <router-link class="to_doc init_nav" to="/doc/button">开始</router-link>
       </div>
     </div>
   </div>
