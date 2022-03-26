@@ -4,8 +4,11 @@
         <div class="content">
             <aside v-if="menuVisible" class="aside">
                 <div class="button aside_item"
-                 v-for="item, index in menus" :key="index">
-                    <router-link :to="item.route" class="aside__style">{{item.name}}</router-link>
+                 v-for="item, index in menus" :key="index"
+                  :class="{ select_menu: showMenuIndex === index }"
+                  @click="onClick(index)">
+                    <router-link :to="item.route" class="aside__style"
+                     :style="{ color: showMenuIndex === index ? 'white' : '' }">{{item.name}}</router-link>
                 </div>
                 <!-- <div class="switch aside_item">
                     <router-link to="/doc/switch" class="aside__style">switch组件</router-link>
@@ -49,13 +52,17 @@ export default {
         const showMenuIndex = ref<number>(0)
         const menuVisible = inject<Ref<boolean>>("menuVisible");
         const isShowHome = inject<Ref<boolean>>("isShowHome");
+        function onClick(i) {
+            showMenuIndex.value = i
+        }
         onMounted(() => {
             isShowHome.value = true;
         })
         return {
             menuVisible,
             showMenuIndex,
-            menus
+            menus,
+            onClick
         };
     }
 };
@@ -64,7 +71,7 @@ export default {
 <style lang="scss" scoped>
 .content {
     display: flex;
-    select_menu: {
+    .select_menu {
         background: burlywood;
         color: white;
     }
