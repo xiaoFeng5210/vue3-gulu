@@ -3,10 +3,11 @@
         <Topnav />
         <div class="content">
             <aside v-if="menuVisible" class="aside">
-                <div class="button aside_item">
-                    <router-link to="/doc/button" class="aside__style">button组件</router-link>
+                <div class="button aside_item"
+                 v-for="item, index in menus" :key="index">
+                    <router-link :to="item.route" class="aside__style">{{item.name}}</router-link>
                 </div>
-                <div class="switch aside_item">
+                <!-- <div class="switch aside_item">
                     <router-link to="/doc/switch" class="aside__style">switch组件</router-link>
                 </div>
                 <div class="star aside_item">
@@ -17,7 +18,7 @@
                 </div>
                 <div class="star aside_item">
                     <router-link to="/doc/tabDemo" class="aside__style">Tab组件</router-link>
-                </div>
+                </div> -->
                 <!-- <div class="star aside_item">
                     <router-link to="/doc/formDemo" class="aside__style">表单组件</router-link>
                 </div>-->
@@ -31,9 +32,12 @@
 
 <script lang="ts">
 import Topnav from "../components/Topnav.vue";
+import { menuList } from "../utils/menuList"
 import {
     inject,
     onMounted,
+    reactive,
+    ref,
     Ref
 } from "vue";
 export default {
@@ -41,13 +45,17 @@ export default {
         Topnav
     },
     setup() {
+        const menus = reactive(menuList)
+        const showMenuIndex = ref<number>(0)
         const menuVisible = inject<Ref<boolean>>("menuVisible");
         const isShowHome = inject<Ref<boolean>>("isShowHome");
         onMounted(() => {
             isShowHome.value = true;
         })
         return {
-            menuVisible
+            menuVisible,
+            showMenuIndex,
+            menus
         };
     }
 };
@@ -56,6 +64,10 @@ export default {
 <style lang="scss" scoped>
 .content {
     display: flex;
+    select_menu: {
+        background: burlywood;
+        color: white;
+    }
 
     .aside {
         width: 120px;
