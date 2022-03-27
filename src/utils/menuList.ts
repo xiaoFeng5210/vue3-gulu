@@ -24,4 +24,8 @@ export const menuList: Menu[] = [
     route: "/doc/tabDemo",
     name: "tabDemo组件",
   },
+  {
+    route: "/doc/test",
+    name: "测试页面",
+  },
 ];
