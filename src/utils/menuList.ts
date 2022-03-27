@@ -10,18 +10,18 @@ export const menuList: Menu[] = [
   },
   {
     route: "/doc/switch",
-    name: "switch组建",
+    name: "switch组件",
   },
   {
     route: "/doc/star",
-    name: "star组建",
+    name: "star组件",
   },
   {
     route: "/doc/dialog",
-    name: "dialog组建",
+    name: "dialog组件",
   },
   {
     route: "/doc/tabDemo",
-    name: "tabDemo组建",
+    name: "tabDemo组件",
   },
 ];
