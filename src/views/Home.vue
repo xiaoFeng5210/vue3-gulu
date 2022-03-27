@@ -12,13 +12,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import { onMounted } from "vue";
 import Topnav from "../components/Topnav.vue";
-export default {
-  components: {
-    Topnav
-  }
-};
 </script>
 
 <style lang="scss" scoped>
