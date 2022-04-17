@@ -57,8 +57,8 @@ function dragover(event: DragEvent) {
     border: 1px solid gray;
   }
   .enter {
-    // background-color: blue;
-    opacity: 0.5;
+    background-color: blue;
+    opacity: 0.8;
   }
 }
 </style>

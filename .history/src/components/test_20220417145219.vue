@@ -9,7 +9,7 @@
       @dragover="dragover"
       @drop="drop"
       @dragenter="dragenter($event, index)"
-      :class="{ enter: index === dragIndex }"
+      :class="{ enter: index === dragIndex &&  }"
     >
       {{ item }}
     </div>
@@ -21,7 +21,7 @@ import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
 const list = reactive(Array.from({ length: 15 }, (el, i) => i));
-const dragIndex = ref<number>(-1);
+const dragIndex = ref<number>(0);
 const router = useRouter();
 function dragstart(event: DragEvent, index: number) {
   dragIndex.value = index;
@@ -56,9 +56,8 @@ function dragover(event: DragEvent) {
     height: 200px;
     border: 1px solid gray;
   }
-  .enter {
-    // background-color: blue;
-    opacity: 0.5;
-  }
+}
+.enter {
+  border-color: blue;
 }
 </style>
