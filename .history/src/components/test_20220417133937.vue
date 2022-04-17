@@ -13,22 +13,21 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
+import { onMounted, onUnmounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 
 const list = reactive(Array.from({ length: 15 }, (el, i) => i));
 
 const router = useRouter();
-function dragstart(event: DragEvent, index: number) {
-  let effectAllowed = event.dataTransfer?.effectAllowed;
-  effectAllowed = "move";
-  event.dataTransfer?.setData("dragData", JSON.stringify(list[index]));
+function dragstart(event: dragEvent, index: number) {
+  event.dataTransfer.effectAllowed = "move";
+  event.dataTransfer.setData("dragData");
 }
-function drop(event: DragEvent) {
-  const data = event.dataTransfer?.getData("dragData");
+function drop(event: dragEvent) {
+  const data = event.dataTransfer.getData("dragData");
   console.log(data);
 }
-function dragover(event: DragEvent) {
+function dragover(event: dragEvent) {
   event.preventDefault();
 }
 </script>
